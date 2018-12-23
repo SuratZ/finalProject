@@ -45,7 +45,7 @@ UserTransaction utx;
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        if (session.getAttribute("account") == null) {
+        /*if (session.getAttribute("account") == null) {
             getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         } else {
         if(session!=null){
@@ -63,7 +63,26 @@ UserTransaction utx;
 
         }
        
-        }
+        }*/
+        
+            Customer cusSession = (Customer) session.getAttribute("customer");
+
+                CustomerJpaController customerJpaCtrl = new CustomerJpaController(utx, emf);
+                Customer customer = customerJpaCtrl.findCustomer(cusSession.getCustId());
+
+                    System.out.println("----");
+                    List<History> listHistory = customer.getHistoryList();
+//                    for (History history : listHistory) {
+//                        history.getTimeStamp();
+//                        history.getTotalPrice();
+//                        history.getCustId().getEmail().getEmail();
+//                        history.getProductId().getImage();
+//                    }
+                    session.setAttribute("listHistory", listHistory);
+                    getServletContext().getRequestDispatcher("/History.jsp").forward(request, response);
+                    return;
+         
+        
     }
         
 //        HttpSession session = request.getSession(false);

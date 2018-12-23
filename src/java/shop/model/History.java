@@ -6,6 +6,7 @@
 package shop.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -42,9 +45,9 @@ public class History implements Serializable {
     @Basic(optional = false)
     @Column(name = "HISTORY_ID")
     private Integer historyId;
-    @Size(max = 45)
     @Column(name = "TIME_STAMP")
-    private String timeStamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timeStamp;
     @Column(name = "ORDER_ID")
     private Integer orderId;
     @Column(name = "QUANTITY")
@@ -61,6 +64,15 @@ public class History implements Serializable {
     public History() {
     }
 
+    public History(Date timeStamp, Integer orderId, Integer quantity, Integer totalPrice, Customer custId,Product productId) {
+        this.timeStamp = timeStamp;
+        this.orderId = orderId;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.custId = custId;
+        this.productId=productId;
+    }
+    
     public History(Integer historyId) {
         this.historyId = historyId;
     }
@@ -73,11 +85,11 @@ public class History implements Serializable {
         this.historyId = historyId;
     }
 
-    public String getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
 

@@ -51,7 +51,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="Account.jsp" >Account</a>
-                    <a class="dropdown-item" href="History.jsp">History</a>
+                    <a class="dropdown-item" href="History">History</a>
                     
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="Logout">Logout</a>

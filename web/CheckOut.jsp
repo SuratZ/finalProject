@@ -61,7 +61,7 @@
 
                                         <!--firstName-->
                                         <div class="md-form ">
-                                            <input type="text"id="firstName" class="form-control" placeholder="First name" value="${sessionScope.customer.name}">
+                                            <input type="text"id="firstName" class="form-control" placeholder="First name" value="${sessionScope.customer.name}" required="">
                                             <label for="firstName" class="">First name</label>
                                         </div>
 
@@ -73,7 +73,7 @@
 
                                         <!--lastName-->
                                         <div class="md-form">
-                                            <input type="text" id="lastName" class="form-control" placeholder="Last name"value="${sessionScope.customer.lastname}">
+                                            <input type="text" id="lastName" class="form-control" placeholder="Last name"value="${sessionScope.customer.lastname}" required="">
                                             <label for="lastName" class="">Last name</label>
                                         </div>
 
@@ -86,22 +86,22 @@
 
                                 <!--email-->
                                 <div class="md-form mb-5">
-                                    <input type="text" id="email" class="form-control" placeholder="youremail@example.com" value="${sessionScope.customer.email.email}">
+                                    <input type="text" id="email" class="form-control" placeholder="youremail@example.com" value="${sessionScope.customer.email.email}" required="">
                                     <label for="email" class="">Email</label>
                                 </div>
 
                                 <!--address-->
                                 <div class="md-form mb-2">
-                                    <textarea type="text" id="address" class="form-control" name="address" placeholder="1234 Main St" >${sessionScope.customer.address}</textarea>
+                                    <textarea type="text" id="address" class="form-control" name="address" placeholder="1234 Main St" required="">${sessionScope.customer.address}</textarea>
                                     <label for="address" class="">Address</label>
                                 </div>
 
                                 <hr>
                                 <label for="address" class="">Shipping</label>
                              
-                                    <select class="browser-default custom-select" >
-                                        <option disabled selected name="ship">รูปแบบการส่ง</option>
-                                        <option value="EMS">EMS</option>
+                                <select class="browser-default custom-select" required>
+                                       
+                                        <option selected value="EMS">EMS</option>
                                         <option value="ลงทะเบียน">ลงทะเบียน</option>                                
                                     </select>
                                 
@@ -116,10 +116,7 @@
                                         <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
                                         <label class="custom-control-label" for="debit">Debit card</label>
                                     </div>
-                                    <div class="custom-control custom-radio">
-                                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                        <label class="custom-control-label" for="paypal">Paypal</label>
-                                    </div>
+                                   
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">

@@ -29,83 +29,82 @@
         <title>History List Page</title>
     </head>
     <body>
-          <!-- Navbar -->
-  <jsp:include page="include/Header.jsp?title=Authentication::" />
-  <!-- Navbar -->
-        <div style="width: 70%;margin: auto">
-        <table id="dtBasicExample" class="table table-striped table-bordered table-sm " a cellspacing="0" width="100%" >
-            <thead>
-                <tr>
-                    <th class="th-sm" style="width: 5%">#
-                    </th>
-                    <th class="th-sm">history_id
-                    </th>
-                    <th class="th-sm" hidden="">Time
-                    </th>
-                    <th class="th-sm">Cust_ID 
-                    </th>
-                    <th class="th-sm">Price
-                    </th>
-                    <th class="th-sm">
-                    </th>
-                </tr>
-            </thead>
-            <a href="GoToJSP"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
-             <c:set var="items" value="${sessionScope.cart.lineItems}"/>
+        <!-- Navbar -->
+        <jsp:include page="include/Header.jsp?title=Authentication::" />
+        <!-- Navbar -->
+        <div style="width: 70%;margin: auto;padding-top: 100px">
+            <table id="dtBasicExample" class="table table-striped table-bordered table-sm " a cellspacing="0" width="100%" >
+                <thead>
+                    <tr>
+                        <th class="th-sm" style="text-align: center;width: 5%">#
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Time
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Image
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Product
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Quantity
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Price
+                        </th>
+                    </tr>
+                </thead>
+                <a href="GoToJSP"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
+                <c:set var="items" value="${listHistory}"/>
                 <c:set var="bgColorX" value="lightgray" />
                 <c:set var="bgColorY" value="white" />
-            
 
-                <c:forEach items="${history}" var="h" varStatus="vs">
+
+                <c:forEach items="${listHistory}" var="h" varStatus="vs">
                     <tr>
-                        <td>${vs.count}</td>
-                        <td>${h.history_id}</td>
-                        <td hidden="">${h.time_stamp}</td>
-                        <td>${h.cust_id}</td>                       
-                        <td >${h.total_price} บาท</td>
-                        <td>
-                         
-                        </td>
+                        <td style="text-align: center;">${vs.count}</td>
+                        <td style="text-align: center;">${h.getTimeStamp()}</td>
+                        <td style="text-align: center;"><img width="120"src="model-images/${h.getProductId().getImage()}"></td>
+                        <td style="text-align: center;">${h.getProductId().getProductName()}</td>  
+                        <td style="text-align: center;">${h.getQuantity()}</td> 
+                        <td style="text-align: center;">${h.getTotalPrice()} บาท</td>
+
                     </tr>
-                
+
                 </c:forEach>
-            
-            <tfoot>
-                 <tr>
-                    <th class="th-sm" style="width: 5%">#
-                    </th>
-                    <th class="th-sm">history_id
-                    </th>
-                    <th class="th-sm" hidden="">Time
-                    </th>
-                    <th class="th-sm">Cust_ID 
-                    </th>
-                    <th class="th-sm">Price
-                    </th>
-                    <th class="th-sm">
-                    </th>
-                </tr>
-            </tfoot> 
-            
-</table>
-              <a href="GoToJSP"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
-</div>
 
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="js/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="js/mdb.min.js"></script>
-<!-- MDBootstrap Datatables  -->
-<script type="text/javascript" src="js/addons/datatables.min.js"></script>
-<script>
-    $(document).ready(function () {
-$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
+                <tfoot>
+                    <tr>
+                        <th class="th-sm" style="width: 5%">#
+                        </th>
+                        <th class="th-sm">Time
+                        </th>
+                        <th class="th-sm">Image
+                        </th>
+                        <th class="th-sm">Product
+                        </th>
+                        <th class="th-sm">Quantity
+                        </th>
+                        <th class="th-sm">Price
+                        </th>
+                    </tr>
+                </tfoot> 
 
-});
-</script>
-</body>
+            </table>
+            <a href="GoToJSP"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
+        </div>
+
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <!-- MDBootstrap Datatables  -->
+        <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dtBasicExample').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+
+            });
+        </script>
+    </body>
 </html>

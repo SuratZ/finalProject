@@ -111,8 +111,10 @@
                     <div class="row" style="margin-top: 25px;">
                         <div class="col-6"></div>
 
-
-                        <div class="col-6"><a href="CheckOut"><button type="button" class="btn btn-success">ชำระเงินค่าสินค้า</button></a></div>
+                        <form action="CheckOutCart" method="post">
+                            <input type="submit"class="btn btn-success" value="ชำระเงินค่าสินค้า">
+                        <!--<div class="col-6"><a href="CheckOut.jsp"><input class="btn btn-success">ชำระเงินค่าสินค้า</button></a></div>-->
+                        </form>
                     </div>
                 </div>  
             </div><a href="index.jsp"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
