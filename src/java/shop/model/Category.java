@@ -8,7 +8,6 @@ package shop.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -43,7 +42,7 @@ public class Category implements Serializable {
     @Size(max = 45)
     @Column(name = "CATEGORY_NAME")
     private String categoryName;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "categoryId")
+    @OneToMany(mappedBy = "categoryId")
     private List<Product> productList;
 
     public Category() {

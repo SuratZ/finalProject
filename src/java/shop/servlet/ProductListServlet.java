@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
-import shop.model.OrderDetail;
 import shop.model.Product;
 import shop.model.jpa.controller.ProductJpaController;
 

@@ -36,8 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName")
     , @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")
     , @NamedQuery(name = "Product.findByImage", query = "SELECT p FROM Product p WHERE p.image = :image")
-    , @NamedQuery(name = "Product.findByPriceLength", query = "SELECT p FROM Product p WHERE p.price between :min and :max")   
-})
+    , @NamedQuery(name = "Product.findByPriceLength", query = "SELECT p FROM Product p WHERE p.price between :min and :max")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,11 +58,11 @@ public class Product implements Serializable {
     @Size(max = 45)
     @Column(name = "IMAGE")
     private String image;
-    @OneToMany(mappedBy = "productId")
-    private List<OrderDetail> orderDetailList;
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
     @ManyToOne
     private Category categoryId;
+    @OneToMany(mappedBy = "productId")
+    private List<History> historyList;
 
     public Product() {
     }
@@ -133,21 +132,21 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-    @XmlTransient
-    public List<OrderDetail> getOrderDetailList() {
-        return orderDetailList;
-    }
-
-    public void setOrderDetailList(List<OrderDetail> orderDetailList) {
-        this.orderDetailList = orderDetailList;
-    }
-
     public Category getCategoryId() {
         return categoryId;
     }
 
     public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @XmlTransient
+    public List<History> getHistoryList() {
+        return historyList;
+    }
+
+    public void setHistoryList(List<History> historyList) {
+        this.historyList = historyList;
     }
 
     @Override
