@@ -18,8 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import shop.model.Account;
+import static shop.model.Account_.email;
+import static shop.model.Account_.password;
+import shop.model.Customer;
 import shop.model.Product;
 import shop.model.jpa.controller.AccountJpaController;
+import shop.model.jpa.controller.CustomerJpaController;
 import shop.model.jpa.controller.ProductJpaController;
 
 /**
@@ -44,13 +48,23 @@ public class AccountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        AccountJpaController accoutCtrl = new AccountJpaController(utx, emf);
+       
         if (session.getAttribute("account") == null) {
             session.setAttribute("message", "This site required you to Login");
             getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         } else {
-            List<Account> accounts = accoutCtrl.findAccountEntities();
-            request.setAttribute("account", accounts);
+            //String accountEmail = request.getParameter("email");
+            Account accountsession = (Account)session.getAttribute("account");
+            AccountJpaController accountCtrl = new AccountJpaController(utx, emf);
+            Account account = accountCtrl.findAccount(accountsession.getEmail());
+   
+            CustomerJpaController customerCtrl = new CustomerJpaController(utx, emf);
+            System.out.println(account.getEmail());
+            Customer customer = customerCtrl.findByEmail(account.getEmail());
+            
+            System.out.println(customer);
+            
+            /*session.setAttribute("account", customer);*/
             
             
             getServletContext().getRequestDispatcher("/Account.jsp").forward(request, response);

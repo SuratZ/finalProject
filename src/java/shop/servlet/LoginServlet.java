@@ -21,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import shop.model.Account;
+import shop.model.Customer;
 import shop.model.jpa.controller.AccountJpaController;
+import shop.model.jpa.controller.CustomerJpaController;
 import static shop.servlet.RegisterServlet.cryptWithMD5;
 
 /**
@@ -46,9 +48,7 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          HttpSession session = request.getSession(true);
-        if(session.getAttribute("account")!=null){
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-        }else{ 
+        
          
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -60,7 +60,11 @@ public class LoginServlet extends HttpServlet {
                 Account a = accJpa.findAccount(email);
                 if (a != null) {
                     if (a.getEmail().equals(email) && password.equals(a.getPassword())) {
-                        request.getSession().setAttribute("account", a);
+                        CustomerJpaController cusCtrl = new CustomerJpaController(utx, emf);
+                        Customer customer = cusCtrl.findByEmail(a.getEmail());
+                        
+                        session.setAttribute("account", a);
+                        session.setAttribute("customer", customer);
 //                        request.getSession().setAttribute("message", "Login now");
                         response.sendRedirect("index.jsp");
                         return;
@@ -70,7 +74,7 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", "Invalid email or password!!");
         }
         getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

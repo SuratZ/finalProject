@@ -22,6 +22,7 @@ import shop.model.History;
 import shop.model.Product;
 import shop.model.ShoppingCart;
 import shop.model.jpa.controller.AccountJpaController;
+import shop.model.jpa.controller.HistoryJpaController;
 import shop.model.jpa.controller.ProductJpaController;
 
 /**
@@ -47,10 +48,15 @@ UserTransaction utx;
         response.setContentType("text/html;charset=UTF-8");
          HttpSession session = request.getSession();
         ProductJpaController productCtrl = new ProductJpaController(utx, emf);
+        if(session==null){
+            request.getSession(true);
+        }
         if (session.getAttribute("account") == null) {
             session.setAttribute("message", "This site required you to Login");
             getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         } else {
+            HistoryJpaController historyCtrl = new HistoryJpaController(utx, emf);
+            List<>
             
         }
     }

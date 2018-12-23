@@ -1,24 +1,35 @@
-package shop.servlet;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package shop.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
+import shop.model.Product;
+import shop.model.jpa.controller.ProductJpaController;
 
 /**
  *
- * @author Krittaporn
+ * @author Zeron
  */
-public class GoToJSPServlet extends HttpServlet {
+public class SearchByPriceServlet extends HttpServlet {
+
+    @PersistenceUnit(unitName = "projectWebProPU")
+    EntityManagerFactory emf;
+    @Resource
+    UserTransaction utx;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,18 +42,27 @@ public class GoToJSPServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        if (session.getAttribute("account") == null) {
-            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-        } else {
+        ProductJpaController productCtrl = new ProductJpaController(utx, emf);
+        String min = request.getParameter("min");
+        String max = request.getParameter("max");
+        if (min.trim() != null && max.trim() != null) {
+            List<Product> products = productCtrl.findByPriceLength(Integer.parseInt(min), Integer.parseInt(max));
             
-                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-            
+            request.setAttribute("min", min);
+            request.setAttribute("max", max);
+            request.setAttribute("product", products);
         }
+        
+        
+
+        getServletContext().getRequestDispatcher("/ProductList.jsp").forward(request, response);
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

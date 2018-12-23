@@ -35,7 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId")
     , @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName")
     , @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")
-    , @NamedQuery(name = "Product.findByImage", query = "SELECT p FROM Product p WHERE p.image = :image")})
+    , @NamedQuery(name = "Product.findByImage", query = "SELECT p FROM Product p WHERE p.image = :image")
+    , @NamedQuery(name = "Product.findByPriceLength", query = "SELECT p FROM Product p WHERE p.price between :min and :max")   
+})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,18 +67,28 @@ public class Product implements Serializable {
 
     public Product() {
     }
-	
-	public Product(String productId, String productName, Double price) {
+
+    public Product(String productId, String productName, Double price) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
     }
-	public Product(String image,String productId, String productName, Double price) {
-		this.image=image;
+
+    public Product(String image, String productId, String productName, Double price) {
+        this.image = image;
         this.productId = productId;
         this.productName = productName;
-		this.price = price;
-        }
+        this.price = price;
+    }
+
+    public Product(String image, String productId, String productName, String detail, Double price) {
+        this.image = image;
+        this.productId = productId;
+        this.productName = productName;
+        this.detail = detail;
+        this.price = price;
+    }
+
     public Product(String productId) {
         this.productId = productId;
     }
@@ -162,5 +174,5 @@ public class Product implements Serializable {
     public String toString() {
         return "shop.model.Product[ productId=" + productId + " ]";
     }
-    
+
 }

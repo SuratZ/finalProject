@@ -51,34 +51,31 @@ FOREIGN KEY (CUST_ID) REFERENCES customer(CUST_ID)
 );
 
 
-CREATE TABLE ORDER_LIST
-(ORDER_ID INT,TIME_STAMP VARCHAR(45),CUST_ID int,
-PRIMARY KEY (ORDER_ID),
-FOREIGN KEY (CUST_ID) REFERENCES customer(CUST_ID));
-
-
-CREATE TABLE ORDER_DETAIL
-(ORDER_DETAILNO INT,ORDER_ID INT,PRODUCT_ID VARCHAR(45),AMOUNT INT,TOTAL_PRICE INT,
-PRIMARY KEY (ORDER_DETAILNO),
-FOREIGN KEY (ORDER_ID) REFERENCES  ORDER_LIST(ORDER_ID) ,
-FOREIGN KEY (PRODUCT_ID) REFERENCES    PRODUCT(PRODUCT_ID));
-
-
 create table history 
-(history_id int, cust_id int, time_stamp varchar(45), order_id int, history_count int, total_price int,
+(history_id int GENERATED ALWAYS AS IDENTITY(START WITH 1 , INCREMENT BY 1) ,
+ cust_id int,
+ PRODUCT_ID VARCHAR(45),
+ time_stamp varchar(45),
+ order_id int,
+ quantity int,
+ total_price int,
 primary key (history_id),
 Foreign key (Cust_id) references Customer(cust_id),
-Foreign key (Order_id) references Order_list(order_id)
+FOREIGN KEY (PRODUCT_ID) references PRODUCT(PRODUCT_ID)
 );
 
 
-INSERT INTO CATEGORY (CATEGORY_ID,CATEGORY_NAME)
-VALUES (1,'Rice'),(2,'Soup'),(3,'Fried'),(4,'Snack');
 
 /*insert Dish Food */
 insert into PRODUCT (PRODUCT_ID,PRODUCT_NAME,DETAIL,CATEGORY_ID,PRICE,IMAGE)
 values ('R01','ข้าวผัด','ใส่ไข่ใส่หมู',1,40,'R01.jpg'),
-('R02','ข้าวกระเพราไก่','ไม่ใส่ถั่วฝักยาว',1,30,'R02.jpg');
+('R02','ข้าวกระเพราไก่','ไม่ใส่ถั่วฝักยาว',1,30,'R02.jpg'),
+('R03','ข้าวไข่ข้นซอสต้มยำ','อร่อยๆ 03',1,50,'R03.jpg'),
+('R04','ข้าวคลุกกะปิ','อร่อย 04',1,50,'R04.jpg'),
+('R05','ข้าวผัดทะเล','อร่อย 05',1,60,'R05.jpg'),
+('R06','ข้าวไข่ระเบิด','อร่อย 06',1,40,'R06.jpg'),
+('R07','ราดหน้าทะเลเส้นใหญ่กรอบ','อร่อย 07',1,60,'R07.jpg'),
+('R08','ข้าวผัดต้มยำไข่เค็ม','อร่อย 08',1,60,'R08.jpg');
 
 
 /*insert Desert Food */

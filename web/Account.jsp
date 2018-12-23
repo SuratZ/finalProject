@@ -36,11 +36,12 @@
        
   <div>
       <h1>Account</h1>
+      <input type="hidden" name="accountEmail" value="${sessionScope.account.email}">
       
-      <a>${sessionScope.account.email.name}hi </a>
+      <a>${sessionScope.customer.name}</a><br>
+      <a>${test}</a>
       
-      <a href="History">History</a>
-      <a href="Logout">Logout</a>
+      
   </div>
       
   </div>

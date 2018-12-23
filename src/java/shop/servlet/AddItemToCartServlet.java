@@ -47,16 +47,19 @@ public class AddItemToCartServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-        if(cart == null){
-            cart = new ShoppingCart();
+        HttpSession session = request.getSession();
+        if(session.getAttribute("cart") == null){
+            ShoppingCart cart = new ShoppingCart();
             session.setAttribute("cart", cart);
         }
+        ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+        
         ProductJpaController productCtrl = new ProductJpaController(utx, emf);
         String productId = request.getParameter("productCode");
         Product p = productCtrl.findProduct(productId);
         cart.add(p);
+        session.setAttribute("cart", cart);
+        
 //        getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
         response.sendRedirect("ProductList");
     }

@@ -25,10 +25,6 @@
         <servlet-class>shop.servlet.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ShowCartServlet</servlet-name>
-        <servlet-class>shop.servlet.ShowCartServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AddProductServlet</servlet-name>
         <servlet-class>shop.servlet.AddItemToCartServlet</servlet-class>
     </servlet>
@@ -41,10 +37,6 @@
         <servlet-class>shop.servlet.HistoryServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GoToJSPServlet</servlet-name>
-        <servlet-class>shop.servlet.GoToJSPServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CartLowerServlet</servlet-name>
         <servlet-class>shop.servlet.CartLowerServlet</servlet-class>
     </servlet>
@@ -55,6 +47,10 @@
     <servlet>
         <servlet-name>AccountServlet</servlet-name>
         <servlet-class>shop.servlet.AccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByPriceServlet</servlet-name>
+        <servlet-class>shop.servlet.SearchByPriceServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProductListServlet</servlet-name>
@@ -71,10 +67,6 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/Register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ShowCartServlet</servlet-name>
-        <url-pattern>/ShowCart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddProductServlet</servlet-name>
@@ -97,10 +89,6 @@
         <url-pattern>/History</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GoToJSPServlet</servlet-name>
-        <url-pattern>/GoToJSP</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CartLowerServlet</servlet-name>
         <url-pattern>/CartLower</url-pattern>
     </servlet-mapping>
@@ -111,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>AccountServlet</servlet-name>
         <url-pattern>/Account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByPriceServlet</servlet-name>
+        <url-pattern>/SearchByPrice</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

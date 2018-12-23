@@ -41,7 +41,7 @@ UserTransaction utx;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
         if(cart == null){
             cart = new ShoppingCart();

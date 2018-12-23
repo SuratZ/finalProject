@@ -27,7 +27,7 @@
             <ul class="navbar-nav mr-auto">
                 
                 <li class="nav-item">
-                    <a class="nav-link waves-effect" href="CustomOrder" onclick="class: activate">Custom-Menu</a>
+                    <a class="nav-link waves-effect" href="CustomOrder.jsp" onclick="class: activate">Custom-Menu</a>
                 </li>
                 <li class="nav-item"hidden="">
                     <a class="nav-link waves-effect" href="" onclick="class: activate">Daily</a>
@@ -58,12 +58,13 @@
                 </div>
             </div>
              &nbsp;&nbsp;
+             </c:if>
             <ul class="navbar-nav nav-flex-icons" >
                 <li class="nav-item" >
                     
                     <a class="nav-link waves-effect" href="Cart.jsp">
                         <c:if test="${not empty sessionScope.cart.lineItems}">
-                 <span class="badge red z-depth-1 mr-1"> ! </span>
+                            <span class="badge red z-depth-1 mr-1">${sessionScope.cart.totalQuantity}</span>
              </c:if>
                         <i class="fa fa-shopping-cart"></i>
                         <span class="clearfix d-none d-sm-inline-block"> Cart </span>
@@ -74,7 +75,7 @@
 
 
             </ul>
-</c:if>
+
         </div>
 
     </div>

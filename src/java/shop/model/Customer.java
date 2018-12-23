@@ -63,7 +63,7 @@ public class Customer implements Serializable {
     @OneToOne(mappedBy = "custId")
     private List<OrderList> orderListList;
     @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne
     private Account email;
     @OneToMany(mappedBy = "custId")
     private List<History> historyList;

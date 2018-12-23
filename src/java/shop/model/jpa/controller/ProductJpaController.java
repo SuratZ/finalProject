@@ -242,5 +242,18 @@ public class ProductJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<Product> findByPriceLength(double min, double max) {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery("Product.findByPriceLength");
+            query.setParameter("min", min);
+            query.setParameter("max", max);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+
+    }
+
 }

@@ -33,10 +33,21 @@
     <body>
         <!-- Navbar -->
         <jsp:include page="include/Header.jsp?title=Authentication::" />
-          
+
         <div style="width: 70%;margin: auto;padding-top: 100px">
             <h1>Menu</h1>
+            
+                <form action="SearchByPrice" method="get">
+                    <input type="number" name="min" placeholder="min price"  required="" value="${requestScope.min}">
+                    ~ 
+                    <input type="number" name="max" placeholder="max price" required="" value="${requestScope.max}"><br>
+                    <input class="btn btn-primary" type="submit" value="Search By Price">
+                    <a href="ProductList" type="button" class="btn btn-outline-info" >Reset</a>
+                </form>
+            
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm table-responsive-md btn-table" a cellspacing="0" width="100%" >
+                
+
                 <thead>
                     <tr>
                         <th class="th-sm " style="width: 1%; text-align: center;">#
@@ -55,14 +66,14 @@
                         </th>
                     </tr>
                 </thead>
-                
+
                 <c:set var="items" value="${sessionScope.cart.lineItems}"/>
                 <c:set var="bgColorX" value="lightgray" />
                 <c:set var="bgColorY" value="white" />
 
 
                 <c:forEach items="${product}" var="p" varStatus="vs">
-                    
+
                     <tr>
                         <td style="text-align: center;">${vs.count}</td>
                         <td style="text-align: center;"><img src="model-images/${p.productId}.jpg" width="120"></td>
@@ -80,7 +91,7 @@
                             </form>
                         </td>
                     </tr>
-                   
+
                 </c:forEach>
 
                 <tfoot>
@@ -97,7 +108,7 @@
                         </th>
                         <th class="th-sm"style="text-align: center;">Price
                         </th>
-                        
+
                         <th class="th-sm">
                         </th>
                     </tr>
@@ -123,5 +134,7 @@
                 $('.dataTables_length').addClass('bs-select');
             });
         </script>
+
+
     </body>
 </html>

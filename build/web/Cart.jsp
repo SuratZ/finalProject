@@ -94,8 +94,11 @@
                 <c:set var="total" value="0" />
                 <c:forEach items="${sessionScope.cart.lineItems}" var="line">
                     <c:set var="total" value="${total + (line.product.price*line.quantity)}" />
+                   
                 </c:forEach>
-
+                
+                
+                <input type="hidden" value="${total}">
                 <div class="col-3"></div>
                 <div class="col-4"></div>
                 <div class="col-5">
@@ -103,12 +106,13 @@
                         <div class="col-6">ราคาสุทธิ</div>
                         <div class="col-6">
                             <c:out value="${total}" /> บาท</div>
+                            
                     </div>
                     <div class="row" style="margin-top: 25px;">
                         <div class="col-6"></div>
 
 
-                        <div class="col-6"><a href="CheckOut.jsp"><button type="button" class="btn btn-success">ชำระเงินค่าสินค้า</button></a></div>
+                        <div class="col-6"><a href="CheckOut"><button type="button" class="btn btn-success">ชำระเงินค่าสินค้า</button></a></div>
                     </div>
                 </div>  
             </div><a href="index.jsp"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>

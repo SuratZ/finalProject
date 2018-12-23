@@ -7,6 +7,7 @@ package shop.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import shop.model.OrderList;
 import shop.model.Product;
+import shop.model.ShoppingCart;
 import shop.model.jpa.controller.OrderListJpaController;
 import shop.model.jpa.controller.ProductJpaController;
 import shop.model.jpa.controller.exceptions.RollbackFailureException;
@@ -47,32 +49,57 @@ public class CustomOrderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        if (session.getAttribute("account") == null) {
-            session.setAttribute("message", "This site required you to Login");
-            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-        }else{
         
-        String customOrder = request.getParameter("orderName");
-            String customeOrderDetail = request.getParameter("orderDetail");
-            OrderList orderlist = (OrderList) session.getAttribute("orderlist");
-            if (orderlist == null) {
-                orderlist = new OrderList();
-                session.setAttribute("orderlist", orderlist);
-            }
-            OrderListJpaController orderlistCtrl = new OrderListJpaController(utx, emf);
-            String productId = request.getParameter("productId");
-            ProductJpaController proJpa = new ProductJpaController(utx, emf);
-            Product product = proJpa.findProduct(productId);
-            session.setAttribute("product", product); //???
-            try {
-                orderlistCtrl.create(orderlist);
-            } catch (RollbackFailureException ex) {
-                Logger.getLogger(AddItemToCartServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(AddItemToCartServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            response.sendRedirect("AddFood");
+            
+            
+        
+        
+        
+        ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+        if(cart == null){
+            cart = new ShoppingCart();
+            session.setAttribute("cart", cart);
         }
+        String customId = request.getParameter("customID");
+        int customIdInt = Integer.parseInt(customId);
+        if(customIdInt>=0){
+            customIdInt++;
+            session.setAttribute("Id", customIdInt);
+            session.setAttribute("customId", customId);
+        }
+        String productDetail = request.getParameter("optionOrder");
+        String productId = request.getParameter("productCode");
+        session.setAttribute("productCode", customId);
+        session.setAttribute("productName", "custom-Order");
+
+        ProductJpaController productCtrl = new ProductJpaController(utx, emf);
+        Product product = new Product("customOrder.jpg",productId,"CustomOrder",productDetail, 50.0);
+       
+        
+        cart.add(product);
+        
+//        session.setAttribute("message", "");
+//        String customOrder = request.getParameter("orderName");
+//            String customeOrderDetail = request.getParameter("orderDetail");
+//            OrderList orderlist = (OrderList) session.getAttribute("orderlist");
+//            if (orderlist == null) {
+//                orderlist = new OrderList();
+//                session.setAttribute("orderlist", orderlist);
+//            }
+//            OrderListJpaController orderlistCtrl = new OrderListJpaController(utx, emf);
+//            String productId = request.getParameter("productId");
+//            ProductJpaController proJpa = new ProductJpaController(utx, emf);
+//            Product product = proJpa.findProduct(productId);
+//            session.setAttribute("product", product); //???
+//            try {
+//                orderlistCtrl.create(orderlist);
+//            } catch (RollbackFailureException ex) {
+//                Logger.getLogger(AddItemToCartServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (Exception ex) {
+//                Logger.getLogger(AddItemToCartServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            response.sendRedirect("Optional.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

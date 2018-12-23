@@ -39,6 +39,7 @@
     <p class="h4 mb-4">Optional</p>
    
 <div class=" col md-form">
+    <input type="hidden" name="customID" value="custom${id}">
     <textarea name="optionOrder" id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" required></textarea>
   <label for="textarea-char-counter">โปรดใส่วัตถุดิบที่ต้องการ</label>
 </div>

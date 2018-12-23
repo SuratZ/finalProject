@@ -278,10 +278,10 @@ public class CustomerJpaController implements Serializable {
 
     public Customer findByEmail(String email) {
         EntityManager em = getEntityManager();
-        Query q = em.createNamedQuery("Customer.findByEmail");
-        q.setParameter("email", email);
         try {
-            return (Customer) q.getSingleResult();
+            Query query =em.createNamedQuery("Customer.findByEmail");
+            query.setParameter("email", email);
+            return (Customer) query.getSingleResult();
         } finally {
             em.close();
         }
