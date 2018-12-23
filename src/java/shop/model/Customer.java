@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -35,9 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.name = :name")
     , @NamedQuery(name = "Customer.findByLastname", query = "SELECT c FROM Customer c WHERE c.lastname = :lastname")
     , @NamedQuery(name = "Customer.findByCustId", query = "SELECT c FROM Customer c WHERE c.custId = :custId")
-             , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
-
-    , @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address")})
+    , @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address")
+    , @NamedQuery(name = "Customer.findByTel", query = "SELECT c FROM Customer c WHERE c.tel = :tel")
+    , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email.email = :email")})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,23 +57,27 @@ public class Customer implements Serializable {
     @Size(max = 500)
     @Column(name = "ADDRESS")
     private String address;
-    @OneToMany(mappedBy = "custId")
+    @Size(max = 10)
+    @Column(name = "TEL")
+    private String tel;
+    @OneToOne(mappedBy = "custId")
     private List<OrderList> orderListList;
     @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
-    @ManyToOne
+    @OneToOne(fetch=FetchType.EAGER)
     private Account email;
     @OneToMany(mappedBy = "custId")
     private List<History> historyList;
 
     public Customer() {
     }
-    
-     public Customer(String name,String lastname,String address) {
-         this.name = name;
-         this.lastname=lastname;
-         this.address=address;
-    }
 
+    public Customer(String name, String lastname, String address,String tel) {
+        this.name = name;
+        this.lastname = lastname;
+        this.address = address;
+        this.tel=tel;
+    }
+    
     public Customer(Integer custId) {
         this.custId = custId;
     }
@@ -106,6 +112,14 @@ public class Customer implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     @XmlTransient
@@ -158,5 +172,5 @@ public class Customer implements Serializable {
     public String toString() {
         return "shop.model.Customer[ custId=" + custId + " ]";
     }
-    
+
 }

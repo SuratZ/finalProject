@@ -279,14 +279,14 @@ public class CustomerJpaController implements Serializable {
     public Customer findByEmail(String email) {
         EntityManager em = getEntityManager();
         Query q = em.createNamedQuery("Customer.findByEmail");
-        q.setParameter("c.email", email);
+        q.setParameter("email", email);
         try {
             return (Customer) q.getSingleResult();
         } finally {
             em.close();
         }
     }
-    
+
     public int getCustomerCount() {
         EntityManager em = getEntityManager();
         try {
@@ -299,5 +299,5 @@ public class CustomerJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -48,9 +48,11 @@ public class CustomOrderServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         if (session.getAttribute("account") == null) {
+            session.setAttribute("message", "This site required you to Login");
             getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-        } else {
-            String customOrder = request.getParameter("orderName");
+        }else{
+        
+        String customOrder = request.getParameter("orderName");
             String customeOrderDetail = request.getParameter("orderDetail");
             OrderList orderlist = (OrderList) session.getAttribute("orderlist");
             if (orderlist == null) {

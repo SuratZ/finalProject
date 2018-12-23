@@ -67,62 +67,59 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, RollbackFailureException, Exception {
-                response.setContentType("text/html;charset=UTF-8");
-                request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String emailRegis = request.getParameter("email");
-        
+
         String passwordRegis = request.getParameter("password");
-        passwordRegis = cryptWithMD5(passwordRegis);
         String fnameRegis = request.getParameter("fname");
         String lnameRegis = request.getParameter("lname");
         String address = request.getParameter("address");
+        String tel = request.getParameter("tel");
         HttpSession session = request.getSession(false);
-                        Account account = new Account(emailRegis, passwordRegis);
-                Customer customer = new Customer(fnameRegis,lnameRegis,address);
+        Account account = new Account(emailRegis, passwordRegis);
+        Customer customer = new Customer(fnameRegis, lnameRegis, address,tel);
         if (session != null) {
-            
-            if (emailRegis != null && emailRegis.length() > 0 && passwordRegis != null && passwordRegis.length() > 0
-                    && fnameRegis != null&&lnameRegis!=null && address != null) {
-               
 
-            CustomerJpaController cusCtrl = new CustomerJpaController(utx, emf);
+            if (emailRegis != null && emailRegis.length() > 0 && passwordRegis != null && passwordRegis.length() > 0
+                    && fnameRegis != null && lnameRegis != null && address != null) {
+                passwordRegis = cryptWithMD5(passwordRegis);
+
+                CustomerJpaController cusCtrl = new CustomerJpaController(utx, emf);
                 AccountJpaController accJpa = new AccountJpaController(utx, emf);
                 Account a = accJpa.findAccount(emailRegis);
-                if(a!=null){
-                     request.setAttribute("message", "This e-mail used already");
-                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
-                return;
+                if (a != null) {
+                    request.setAttribute("message", "This e-mail used already");
+                    getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+                    return;
                 }
-                if(request.getParameter("password").length()<8){
+                if (request.getParameter("password").length() < 8) {
                     request.setAttribute("message", "password must be a least 8 characters");
-                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
-                return;
+                    getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+                    return;
                 }
-                
-                account.setEmail(emailRegis);            
+
+                account.setEmail(emailRegis);
                 account.setPassword(passwordRegis);
                 account.setDateRegis(new Date());
                 accJpa.create(account);
                 customer.setName(fnameRegis);
                 customer.setLastname(lnameRegis);
-                customer.setAddress(address); 
+                customer.setAddress(address);
                 customer.setEmail(account);
+                customer.setTel(tel);
                 cusCtrl.create(customer);
                 session.setAttribute("account", account);
                 request.setAttribute("message", "Register Complete!");
                 getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-            } else{
+            } else {
                 request.setAttribute("message", "Enter form all info");
                 getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
             }
-        
-        }else{
-                request.setAttribute("message", "");
-                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
-            }
-   
-        
-        
+
+        }
+        request.setAttribute("message", "");
+        getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
 
     }
 

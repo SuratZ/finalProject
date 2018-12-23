@@ -5,10 +5,11 @@
 --%>
 
 
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,88 +31,97 @@
         <title>Product List Page</title>
     </head>
     <body>
-          <!-- Navbar -->
-  <jsp:include page="include/Header.jsp?title=Authentication::" />
-  <!-- Navbar -->
-  
-  
+        <!-- Navbar -->
+        <jsp:include page="include/Header.jsp?title=Authentication::" />
+          
         <div style="width: 70%;margin: auto;padding-top: 100px">
-        <table id="dtBasicExample" class="table table-striped table-bordered table-sm " a cellspacing="0" width="100%" >
-            <thead>
-                <tr>
-                    <th class="th-sm" style="width: 5%">#
-                    </th>
-                    <th class="th-sm" style="width: 120px">Image
-                    </th>
-                    <th class="th-sm" hidden="">Product ID
-                    </th>
-                    <th class="th-sm">Product Name
-                    </th>
-                    <th class="th-sm">Price
-                    </th>
-                    <th class="th-sm">
-                    </th>
-                </tr>
-            </thead>
-            <a href="index.jsp"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
-             <c:set var="items" value="${sessionScope.cart.lineItems}"/>
+            <h1>Menu</h1>
+            <table id="dtBasicExample" class="table table-striped table-bordered table-sm table-responsive-md btn-table" a cellspacing="0" width="100%" >
+                <thead>
+                    <tr>
+                        <th class="th-sm " style="width: 1%; text-align: center;">#
+                        </th>
+                        <th class="th-sm" style="width: 120px; text-align: center;">Image
+                        </th>
+                        <th class="th-sm" hidden="">Product ID
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Category
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Product Name
+                        </th>
+                        <th class="th-sm"style="text-align: center;">Price
+                        </th>
+                        <th class="th-sm">
+                        </th>
+                    </tr>
+                </thead>
+                
+                <c:set var="items" value="${sessionScope.cart.lineItems}"/>
                 <c:set var="bgColorX" value="lightgray" />
                 <c:set var="bgColorY" value="white" />
-            
+
 
                 <c:forEach items="${product}" var="p" varStatus="vs">
+                    
                     <tr>
-                        <td>${vs.count}</td>
-                        <td><img src="model-images/${p.productId}.jpg" width="120"></td>
+                        <td style="text-align: center;">${vs.count}</td>
+                        <td style="text-align: center;"><img src="model-images/${p.productId}.jpg" width="120"></td>
                         <td hidden="">${p.productId}</td>
-                        <td>${p.productName}</td>                       
-                        <td >${p.price} บาท</td>
-                        <td>
+
+                        <td style="text-align: center;">${p.categoryId.categoryName}</td>
+
+                        <td style="text-align: center;">${p.productName}</td>  
+
+                        <td style="text-align: center;">${p.price} บาท</td>
+                        <td style="text-align: center;">
                             <form action="AddItemToCart" method="post">
                                 <input type="hidden" value="${p.productId}" name="productCode"/>
-                                <input type="submit" value="Add to Cart"/>
+                                <button type="submit" class="btn btn-primary btn-sm m-0 waves-effect">Add to Cart</button>
                             </form>
                         </td>
                     </tr>
-                
+                   
                 </c:forEach>
-            
-            <tfoot>
-                <tr>
-            <th class="th-sm">#
-            </th>
-            <th class="th-sm">Image
-            </th>
-            <th class="th-sm" hidden="">Product ID
-            </th>
-            <th class="th-sm">Product Name
-            </th>
-            <th class="th-sm">Price
-            </th>
-            <th class="th-sm">
-            </th>
-            </tr>
-            </tfoot> 
-            
-</table>
-              <a href="index.jsp"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
-</div>
 
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="js/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="js/mdb.min.js"></script>
-<!-- MDBootstrap Datatables  -->
-<script type="text/javascript" src="js/addons/datatables.min.js"></script>
-<script>
-    $(document).ready(function () {
-$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
+                <tfoot>
+                    <tr>
+                        <th class="th-sm " style="width: 1%; text-align: center;">#
+                        </th>
+                        <th class="th-sm" style="width: 120px; text-align: center;">Image
+                        </th>
+                        <th class="th-sm" hidden="">Product ID
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Category
+                        </th>
+                        <th class="th-sm" style="text-align: center;">Product Name
+                        </th>
+                        <th class="th-sm"style="text-align: center;">Price
+                        </th>
+                        
+                        <th class="th-sm">
+                        </th>
+                    </tr>
+                </tfoot> 
 
-});
-</script>
-</body>
+            </table>
+            <a href="index.jsp"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
+        </div>
+
+
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <!-- MDBootstrap Datatables  -->
+        <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dtBasicExample').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            });
+        </script>
+    </body>
 </html>

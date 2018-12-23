@@ -8,13 +8,16 @@ package shop.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.FetchType;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,9 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
     , @NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email")
     , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
-    , @NamedQuery(name = "Account.findByDateRegis", query = "SELECT a FROM Account a WHERE a.dateRegis = :dateRegis")
-    , @NamedQuery(name = "Account.findByActivateKey", query = "SELECT a FROM Account a WHERE a.activateKey = :activateKey")
-    , @NamedQuery(name = "Account.findByActivateTimestamp", query = "SELECT a FROM Account a WHERE a.activateTimestamp = :activateTimestamp")})
+    , @NamedQuery(name = "Account.findByDateRegis", query = "SELECT a FROM Account a WHERE a.dateRegis = :dateRegis")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,10 +56,7 @@ public class Account implements Serializable {
     @Column(name = "DATE_REGIS")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRegis;
-    @Size(max = 45)
-    
-    
-    @OneToMany(mappedBy = "email")
+    @OneToOne(fetch=FetchType.EAGER,mappedBy = "email")
     private List<Customer> customerList;
 
     public Account() {
@@ -97,22 +95,6 @@ public class Account implements Serializable {
         this.dateRegis = dateRegis;
     }
 
-    public String getActivateKey() {
-        return activateKey;
-    }
-
-    public void setActivateKey(String activateKey) {
-        this.activateKey = activateKey;
-    }
-
-    public Date getActivateTimestamp() {
-        return activateTimestamp;
-    }
-
-    public void setActivateTimestamp(Date activateTimestamp) {
-        this.activateTimestamp = activateTimestamp;
-    }
-
     @XmlTransient
     public List<Customer> getCustomerList() {
         return customerList;
@@ -121,6 +103,8 @@ public class Account implements Serializable {
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
     }
+    
+    
 
     @Override
     public int hashCode() {

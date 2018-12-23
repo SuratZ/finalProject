@@ -47,10 +47,13 @@ public class ProductListServlet extends HttpServlet {
        HttpSession session = request.getSession();
         ProductJpaController productCtrl = new ProductJpaController(utx, emf);
         if (session.getAttribute("account") == null) {
+            session.setAttribute("message", "This site required you to Login");
             getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         } else {
             List<Product> products = productCtrl.findProductEntities();
             request.setAttribute("product", products);
+            
+            
             getServletContext().getRequestDispatcher("/ProductList.jsp").forward(request, response);
         }
         

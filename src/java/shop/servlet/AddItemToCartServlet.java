@@ -53,8 +53,9 @@ public class AddItemToCartServlet extends HttpServlet {
             cart = new ShoppingCart();
             session.setAttribute("cart", cart);
         }
-        String productId = request.getParameter("productId");
-        Product p = PR;
+        ProductJpaController productCtrl = new ProductJpaController(utx, emf);
+        String productId = request.getParameter("productCode");
+        Product p = productCtrl.findProduct(productId);
         cart.add(p);
 //        getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
         response.sendRedirect("ProductList");

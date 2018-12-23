@@ -4,7 +4,9 @@
     Author     : Zeron
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,8 +36,11 @@
        
   <div>
       <h1>Account</h1>
-      <a>${sessionScope.customer.name}hi </a> 
+      
+      <a>${sessionScope.account.email.name}hi </a>
+      
       <a href="History">History</a>
+      <a href="Logout">Logout</a>
   </div>
       
   </div>

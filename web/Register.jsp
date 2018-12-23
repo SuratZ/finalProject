@@ -64,7 +64,7 @@
     <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
         At least 8 characters
     </small>
-
+    <input type="number" name="tel"id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="tel"required>
  
 
 

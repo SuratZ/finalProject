@@ -11,8 +11,31 @@ import shop.model.Product;
 public class LineItem implements Serializable {
 
     private Product product;
+    private Category category;
     private double salePrice;
     private int quantity;
+    private String categoryName;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public LineItem(Category category, String categoryName) {
+        this.category = category;
+        this.categoryName = categoryName;
+    }
 
     public LineItem() {
 
@@ -26,6 +49,12 @@ public class LineItem implements Serializable {
         this.product = product;
         this.quantity = quantity;
 
+    }
+    
+    public LineItem(Product product, int quantity,Category category) {
+        this.product = product;
+        this.quantity = quantity;
+        this.category = category;
     }
 
     public Product getProduct() {

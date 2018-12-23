@@ -5,7 +5,9 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,65 +27,92 @@
         <!-- MDBootstrap Datatables  -->
         <link href="css/addons/datatables.min.css" rel="stylesheet">
         <title>Cart List Page</title>
+
     </head>
+
     <!-- Navbar -->
     <jsp:include page="include/Header.jsp?title=Authentication::" />
     <!-- Navbar -->
-    <body style="margin-left: 50px; margin-top: 30px;padding-top: 100px">
+    <body>
+        <div style="width: 70%;margin: auto;padding-top: 100px">
+            <h1>My Cart</h1>
 
-        <h1>My Cart</h1>
-
-        <div style="margin-left: 30px;">
-            <table id="dtBasicExample" class="table table-striped table-bordered table-sm " a cellspacing="0" width="100%" >
-                <tr>
-                    <th class="th-sm" style="width: 120px">ภาพตัวอย่าง</th>
-                    <th class="th-sm">ชื่ออาหาร</th>
-                    <th class="th-sm">จำนวน</th>
-                    <th class="th-sm">ราคา / หน่วย</th>
-                    <th class="th-sm">ราคารวม</th>
-                    <th class="th-sm"></td>
-                </tr>
-                <c:forEach items="${sessionScope.cart.lineItems}" var="line" varStatus="vs">
-
+            <div style="margin-left: 30px;">
+                <table id="dtBasicExample" class="table table-striped table-bordered table-sm " a cellspacing="0" width="100%" >
                     <tr>
-                        <td><img class="th-sm" width="120" src="model-images/${line.product.productId}.jpg" alt="" /></td>
-                        <td>${line.product.productName}</td>
-                        <td>
-                            <form action="test">
-                                <input class="form-control mr-sm-2" type="number" name="receivername" value="${line.quantity}">
-                                <button class="btn btn-info">+</button>
-                            </form>
-                        </td>
-                        <td>${line.product.price}</td>
-                        <td>${line.product.price * line.quantity}</td>
-                        <td><a href="CartRemoveFood?productid=${line.product.productId}" class="btn btn-danger"
-                               role="button">X</a></td>
+                        <th class="th-sm" style="width: 120px; text-align: center;">ภาพตัวอย่าง</th>
+                        <th class="th-sm" style="text-align: center;">ชื่ออาหาร</th>
+                        <th class="th-sm" style="text-align: center;">Category
+                        </th>
+                        <th class="th-sm" style="text-align: center;width: 1%">จำนวน</th>
+                        <th class="th-sm" style="text-align: center;">ราคา / หน่วย</th>
+                        <th class="th-sm" style="text-align: center;">ราคารวม</th>
+                        <th class="th-sm" style="text-align: center;"></td>
                     </tr>
-                </c:forEach>
-            </table>
+                    <c:forEach items="${sessionScope.cart.lineItems}" var="line" varStatus="vs">
 
-        </div>
-        <div class="row" style="text-align: center;">
-            <c:set var="total" value="${0}" />
-            <c:forEach var="article" items="${sessionScope.cart.lineItems}">
-                <c:set var="total" value="${total + article.totalPrice}" />
-            </c:forEach>
+                        <tr>
+                            <td style="text-align: center;"><img class="th-sm" width="120" src="model-images/${line.product.productId}.jpg" alt="" /></td>
+                            <td style="text-align: center;">${line.product.productName}
+                                ${line.category.category_name}
+                            </td>
+                            <td style="text-align: center;">${line.product.categoryId.categoryName}</td>
+                            <td style="text-align: center;">
+                                <form action="CartAddFood" method="post">
+                                    <input type="number" class="form-control mr-sm-2 disabled" name="productQty" value="${line.quantity}" >
+                                    <input type="hidden" value="${line.product.price}" id="myProductPrice">
+                                    <input type="hidden" value="${line.product.productId}" name="productCode"/>
+                                    <button class="btn btn-info" type="submit">+</button>
 
-            <div class="col-3"></div>
-            <div class="col-4"></div>
-            <div class="col-5">
-                <div class="row">
-                    <div class="col-6">ราคาสุทธิ</div>
-                    <div class="col-6">
-                        <c:out value="${total}" /> บาท</div>
-                </div>
-                <div class="row" style="margin-top: 25px;">
-                    <div class="col-6"></div>
-                    <div class="col-6"><a href="CheckOut"><button type="button" class="btn btn-success">ชำระเงินค่าสินค้า</button></a></div>
-                </div>
+                                </form>
+                                <form action="CartLower" method="post">
+                                    <input type="hidden" value="${line.product.productId}" name="productCode"/>
+                                    <input type="hidden" class="form-control mr-sm-2 disabled" name="productQty" value="${line.quantity}">
+                                    <button class="btn btn-info" type="submit">-</button>
+                                </form>
+
+                            </td>
+
+                            <td style="text-align: center;">${line.product.price}
+
+                            </td>
+                            <td style="text-align: center;">${line.product.price * line.quantity}</td>
+
+                            <td style="text-align: center;"><form action="CartRemoveFood" method="post">
+                                    <input type="hidden" value="${line.product.productId}" name="productCode"/>
+
+                                    <input class="btn btn-danger" type="submit" value="X"/>
+                                </form>
+                            </td>
+
+                        </tr>
+                    </c:forEach>
+                </table>
+
             </div>
+            <div class="row" style="text-align: center;">
+                <c:set var="total" value="0" />
+                <c:forEach items="${sessionScope.cart.lineItems}" var="line">
+                    <c:set var="total" value="${total + (line.product.price*line.quantity)}" />
+                </c:forEach>
+
+                <div class="col-3"></div>
+                <div class="col-4"></div>
+                <div class="col-5">
+                    <div class="row">
+                        <div class="col-6">ราคาสุทธิ</div>
+                        <div class="col-6">
+                            <c:out value="${total}" /> บาท</div>
+                    </div>
+                    <div class="row" style="margin-top: 25px;">
+                        <div class="col-6"></div>
+
+
+                        <div class="col-6"><a href="CheckOut.jsp"><button type="button" class="btn btn-success">ชำระเงินค่าสินค้า</button></a></div>
+                    </div>
+                </div>  
+            </div><a href="index.jsp"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
         </div>
-        <a href="GoToJSP">back</a>
 
 
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

@@ -33,6 +33,14 @@ public class ShoppingCart implements Serializable{
             line.setQuantity(line.getQuantity() + 1);
         }
     }
+     public void lower(Product p) {
+        LineItem line = cart.get(p.getProductId());
+        
+            line.setQuantity(line.getQuantity() - 1);
+        
+    }
+    
+    
 
     public void remove(Product p) {
         this.remove(p.getProductId());

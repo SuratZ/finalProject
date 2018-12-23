@@ -125,9 +125,5 @@ public class OrderList implements Serializable {
     public String toString() {
         return "shop.model.OrderList[ orderId=" + orderId + " ]";
     }
-
-    public void add(Product product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

@@ -44,6 +44,18 @@
         <servlet-name>GoToJSPServlet</servlet-name>
         <servlet-class>shop.servlet.GoToJSPServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartLowerServlet</servlet-name>
+        <servlet-class>shop.servlet.CartLowerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutTestServlet</servlet-name>
+        <servlet-class>shop.servlet.CheckOutTestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountServlet</servlet-name>
+        <servlet-class>shop.servlet.AccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductListServlet</servlet-name>
         <url-pattern>/ProductList</url-pattern>
@@ -88,9 +100,21 @@
         <servlet-name>GoToJSPServlet</servlet-name>
         <url-pattern>/GoToJSP</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartLowerServlet</servlet-name>
+        <url-pattern>/CartLower</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutTestServlet</servlet-name>
+        <url-pattern>/CheckOutTest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountServlet</servlet-name>
+        <url-pattern>/Account</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            120
         </session-timeout>
     </session-config>
 </web-app>

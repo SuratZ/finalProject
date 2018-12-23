@@ -34,7 +34,7 @@
 <div style="width: 70%;margin: auto; padding-top: 100px;">
     
 <!-- Default form register -->
-<form class="text-center border border-light p-5" action="Register" method="post">
+<form class="text-center border border-light p-5" action="CustomOrder" method="post">
 
     <p class="h4 mb-4">Optional</p>
    

@@ -22,13 +22,15 @@ import shop.model.jpa.controller.ProductJpaController;
 
 /**
  *
- * @author Krittaporn
+ * @author Zeron
  */
-public class CartAddFoodServlet extends HttpServlet {
-@PersistenceUnit(unitName = "projectWebProPU")
-EntityManagerFactory emf;
-@Resource
-UserTransaction utx;
+public class CartLowerServlet extends HttpServlet {
+
+    @PersistenceUnit(unitName = "projectWebProPU")
+    EntityManagerFactory emf;
+    @Resource
+    UserTransaction utx;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,18 +44,25 @@ UserTransaction utx;
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
-        ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-        if(cart == null){
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
-        }
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+
         ProductJpaController productCtrl = new ProductJpaController(utx, emf);
         String productId = request.getParameter("productCode");
         Product p = productCtrl.findProduct(productId);
-        cart.add(p);
-        response.sendRedirect("Cart.jsp");
-//       getServletContext().getRequestDispatcher("/Cart.jsp").forward(request, response);
+        String productQty = request.getParameter("productQty");
+        int productQtyInt = Integer.parseInt(productQty);
+
+        if (productQtyInt > 1) {
+            cart.lower(p);
+            response.sendRedirect("Cart.jsp");
+        } else {
+            cart.remove(p);
+            response.sendRedirect("Cart.jsp");
+
+        }
+
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

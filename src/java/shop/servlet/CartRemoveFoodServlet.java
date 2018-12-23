@@ -42,13 +42,14 @@ UserTransaction utx;
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
        
-                String productCode = request.getParameter("productCode");
-                ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
-                Product p = productJpaCtrl.findProduct(productCode);
-                cart.remove(p); 
-            response.sendRedirect("Cart");
+        ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+        
+        ProductJpaController productCtrl = new ProductJpaController(utx, emf);
+        String productId = request.getParameter("productCode");
+        Product p = productCtrl.findProduct(productId);
+        cart.remove(p);
+         getServletContext().getRequestDispatcher("/Cart.jsp").forward(request, response);
         }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

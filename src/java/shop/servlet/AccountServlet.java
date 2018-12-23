@@ -7,6 +7,7 @@ package shop.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -16,19 +17,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import shop.model.Account;
 import shop.model.Product;
-import shop.model.ShoppingCart;
+import shop.model.jpa.controller.AccountJpaController;
 import shop.model.jpa.controller.ProductJpaController;
 
 /**
  *
- * @author Krittaporn
+ * @author Zeron
  */
-public class CartAddFoodServlet extends HttpServlet {
+public class AccountServlet extends HttpServlet {
 @PersistenceUnit(unitName = "projectWebProPU")
-EntityManagerFactory emf;
-@Resource
-UserTransaction utx;
+    EntityManagerFactory emf;
+    @Resource
+    UserTransaction utx;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,19 +43,20 @@ UserTransaction utx;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(true);
-        ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-        if(cart == null){
-            cart = new ShoppingCart();
-            session.setAttribute("cart", cart);
+        HttpSession session = request.getSession();
+        AccountJpaController accoutCtrl = new AccountJpaController(utx, emf);
+        if (session.getAttribute("account") == null) {
+            session.setAttribute("message", "This site required you to Login");
+            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+        } else {
+            List<Account> accounts = accoutCtrl.findAccountEntities();
+            request.setAttribute("account", accounts);
+            
+            
+            getServletContext().getRequestDispatcher("/Account.jsp").forward(request, response);
         }
-        ProductJpaController productCtrl = new ProductJpaController(utx, emf);
-        String productId = request.getParameter("productCode");
-        Product p = productCtrl.findProduct(productId);
-        cart.add(p);
-        response.sendRedirect("Cart.jsp");
-//       getServletContext().getRequestDispatcher("/Cart.jsp").forward(request, response);
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
