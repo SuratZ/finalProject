@@ -53,8 +53,8 @@
 
                         <tr>
                             <td style="text-align: center;"><img class="th-sm" width="120" src="model-images/${line.product.productId}.jpg" alt="" /></td>
-                            <td style="text-align: center;">${line.product.productName}
-                                ${line.category.category_name}
+                            <td style="text-align: center;">${line.product.productName}<br><br>
+                                Detail: ${line.product.detail}
                             </td>
                             <td style="text-align: center;">${line.product.categoryId.categoryName}</td>
                             <td style="text-align: center;">
