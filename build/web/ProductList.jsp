@@ -28,7 +28,7 @@
         <link href="css/style.css" rel="stylesheet">
         <!-- MDBootstrap Datatables  -->
         <link href="css/addons/datatables.min.css" rel="stylesheet">
-        <title>Product List Page</title>
+        <title>Product List</title>
     </head>
     <body>
         <!-- Navbar -->
@@ -36,11 +36,12 @@
 
         <div style="width: 70%;margin: auto;padding-top: 100px">
             <h1>Menu</h1>
+            <h3>Filter</h3>
 
             <form action="SearchByPrice" method="get">
                 <input type="number" name="min" placeholder="min price"  required="" value="${requestScope.min}">
                 ~ 
-                <input type="number" name="max" placeholder="max price" required="" value="${requestScope.max}"><br>
+                <input type="number" name="max" placeholder="max price" required="" value="${requestScope.max}"> 
                 <input class="btn btn-primary" type="submit" value="Search By Price">
                 <a href="ProductList" type="button" class="btn btn-outline-info" >Reset</a>
             </form>

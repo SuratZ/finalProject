@@ -25,7 +25,7 @@
         <link href="css/style.css" rel="stylesheet">
         <!-- MDBootstrap Datatables  -->
         <link href="css/addons/datatables.min.css" rel="stylesheet">
-        <title>CheckOut Page</title>
+        <title>CheckOut</title>
 
     </head>
 
@@ -36,7 +36,7 @@
         <!--Main layout-->
         <main class="mt-5 pt-4">
             <div class="container wow fadeIn">
-
+                
                 <!-- Heading -->
                 <h2 class="my-5 h2 text-center">Checkout form</h2>
 
@@ -156,9 +156,9 @@
                                 </div>
                                 <hr class="mb-4">
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-
+                                
                             </form>
-
+                                    
                         </div>
                         <!--/.Card-->
 
@@ -202,7 +202,7 @@
                     </div>
                     <!--Grid column-->
 
-                </div>
+                </div><a href="Cart.jsp" class="btn btn-primary">Back to Cart</a>
                 <!--Grid row-->
 
             </div>

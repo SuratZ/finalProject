@@ -25,7 +25,7 @@
         <link href="css/style.css" rel="stylesheet">
         <!-- MDBootstrap Datatables  -->
         <link href="css/addons/datatables.min.css" rel="stylesheet">
-        <title>Account Page</title>
+        <title>Account</title>
     </head>
       <!-- Navbar -->
   <jsp:include page="include/Header.jsp?title=Authentication::" />
@@ -36,11 +36,53 @@
        
   <div>
       <h1>Account</h1>
-      <input type="hidden" name="accountEmail" value="${sessionScope.account.email}">
-      
-      <a>${sessionScope.customer.name}</a><br>
-      <a>${test}</a>
-      
+  
+<div class="row">
+
+                                    <!--Grid column-->
+                                    <div class="col-md-6 mb-2">
+
+                                        <!--firstName-->
+                                        <div class="md-form ">
+                                            <input type="text"id="firstName" class="form-control" placeholder="First name" value="${sessionScope.customer.name}" required="" disabled="">
+                                            <label for="firstName" class="">First name</label>
+                                        </div>
+
+                                    </div>
+                                    <!--Grid column-->
+
+                                    <!--Grid column-->
+                                    <div class="col-md-6 mb-2">
+
+                                        <!--lastName-->
+                                        <div class="md-form">
+                                            <input type="text" id="lastName" class="form-control" placeholder="Last name"value="${sessionScope.customer.lastname}" required="" disabled="">
+                                            <label for="lastName" class="">Last name</label>
+                                        </div>
+
+                                    </div>
+                                    <!--Grid column-->
+
+                                </div>
+                                <!--Grid row-->
+
+
+                                <!--email-->
+                                <div class="md-form mb-5">
+                                    <input type="text" id="email" class="form-control" placeholder="youremail@example.com" value="${sessionScope.customer.email.email}" required="" disabled="">
+                                    <label for="email" class="">Email</label>
+                                </div>
+
+                                <!--address-->
+                                <div class="md-form mb-2">
+                                    <textarea type="text" id="address" class="form-control" name="address" placeholder="1234 Main St" required="" disabled="">${sessionScope.customer.address}</textarea>
+                                    <label for="address" class="">Address</label>
+                                </div>
+                                    
+                                    <div class="md-form mb-5">
+                                    <input type="text" id="email" class="form-control" placeholder="youremail@example.com" value="${sessionScope.customer.tel}" required="" disabled="">
+                                    <label for="email" class="">Tel.</label>
+                                </div>
       
   </div>
       

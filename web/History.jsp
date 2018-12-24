@@ -26,13 +26,14 @@
         <link href="css/style.css" rel="stylesheet">
         <!-- MDBootstrap Datatables  -->
         <link href="css/addons/datatables.min.css" rel="stylesheet">
-        <title>History List Page</title>
+        <title>History</title>
     </head>
     <body>
         <!-- Navbar -->
         <jsp:include page="include/Header.jsp?title=Authentication::" />
         <!-- Navbar -->
         <div style="width: 70%;margin: auto;padding-top: 100px">
+            <h1>History</h1>
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm " a cellspacing="0" width="100%" >
                 <thead>
                     <tr>
