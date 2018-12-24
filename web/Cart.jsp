@@ -52,7 +52,7 @@
                     <c:forEach items="${sessionScope.cart.lineItems}" var="line" varStatus="vs">
 
                         <tr>
-                            <td style="text-align: center;"><img class="th-sm" width="120" src="model-images/${line.product.productId}.jpg" alt="" /></td>
+                            <td style="text-align: center;"><img class="th-sm" width="120" src="model-images/${line.product.image}" alt="" /></td>
                             <td style="text-align: center;">${line.product.productName}<br><br>
                                 Detail: ${line.product.detail}
                             </td>

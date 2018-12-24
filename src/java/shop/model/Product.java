@@ -36,7 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findByProductName", query = "SELECT p FROM Product p WHERE p.productName = :productName")
     , @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")
     , @NamedQuery(name = "Product.findByImage", query = "SELECT p FROM Product p WHERE p.image = :image")
-    , @NamedQuery(name = "Product.findByPriceLength", query = "SELECT p FROM Product p WHERE p.price between :min and :max")})
+    , @NamedQuery(name = "Product.findByPriceLength", query = "SELECT p FROM Product p WHERE p.price between :min and :max")
+   , @NamedQuery(name = "Product.findLastCusId", query = "SELECT MAX(p.productId) FROM Product p WHERE p.productId like 'C%'")
+})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -91,15 +93,6 @@ public class Product implements Serializable {
     public Product(String image, String productId, String productName, Category categoryId, String detail, Double price) {
         this.image = image;
         this.productId = productId;
-        this.productName = productName;
-        this.categoryId = categoryId;
-        this.detail = detail;
-        this.price = price;
-    }
-
-    public Product(String image, String productName, Category categoryId, String detail, Double price) {
-        this.image = image;
-
         this.productName = productName;
         this.categoryId = categoryId;
         this.detail = detail;

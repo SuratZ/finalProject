@@ -56,28 +56,20 @@ public class CustomOrderServlet extends HttpServlet {
             cart = new ShoppingCart();
             session.setAttribute("cart", cart);
         }
-        String customId = request.getParameter("customID");
-        String optionOrder = request.getParameter("optionOrder");
-        int customIdInt = Integer.parseInt(customId);
-        if(customIdInt>=0){
-            customIdInt++;
-            session.setAttribute("customId", customIdInt);
-        }
-        String productDetail = request.getParameter("optionOrder");
-        int productId = 0;
-        session.setAttribute("productCode", customId);
-        session.setAttribute("productName", "custom-Order");
-        session.setAttribute("productDetail", optionOrder);
-        CategoryJpaController catCtrl = new CategoryJpaController(utx, emf);
-       
-   
+        String productDetail = request.getParameter("optionOrder");        
+//        int customIdSet;
+
         ProductJpaController productCtrl = new ProductJpaController(utx, emf);
-        
-        
+        int subInt = 0;
+         subInt = Integer.parseInt(productCtrl.findLastCusId().substring(1));
+
         try {
-                Product pro = new Product("customOrder.jpg","C"+(productId++),"CustomOrder",new Category(3),productDetail, 50.0);
+                Product pro = new Product("customOrder.jpg","C"+(subInt+1),"CustomOrder",new Category(3),productDetail, 50.0); 
                 productCtrl.create(pro);
                 cart.add(pro);
+                session.setAttribute("cart", cart);
+//                session.setAttribute("customIdSet", subInt+1);
+//                customIdSet = (subInt+1);
             } catch (Exception ex) {
                 Logger.getLogger(CheckOutTestServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

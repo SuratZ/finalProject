@@ -255,5 +255,19 @@ public class ProductJpaController implements Serializable {
         }
 
     }
+    
+    public String findLastCusId() {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery("Product.findLastCusId");
+            
+            return (String) query.getSingleResult();
+        } finally {
+            em.close();
+        }
+
+    }
+    
+    
 
 }
