@@ -23,7 +23,7 @@
         <link href="css/style.css" rel="stylesheet">
         <!-- MDBootstrap Datatables  -->
         <link href="css/addons/datatables.min.css" rel="stylesheet">
-        <title>Login Page</title>
+        <title>ThaiFoodDelivery: CustomOrder</title>
 </head>
 
 <body>
