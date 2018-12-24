@@ -53,6 +53,121 @@
   <!-- Navbar -->
 
  
+   <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
+
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+
+      <!--First slide-->
+      <div class="carousel-item active">
+        <div class="view" style="background-image: url('model-images/index1.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Thai Food Delivery</strong>
+              </h1>
+
+              <p>
+                <strong>" I just don't want to look back
+                and think ...
+                I could've eaten that. "</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>Happy Eating</strong>
+              </p>
+
+            
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/First slide-->
+
+      <!--Second slide-->
+      <div class="carousel-item">
+        <div class="view" style="background-image: url('model-images/index2.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Thai Food Delivery</strong>
+              </h1>
+
+              <p>
+                <strong>" I followed my heart and it led me into the Thai Food Delivery! "</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>Happy Eating</strong>
+              </p>
+
+              
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/Second slide-->
+
+      <!--Third slide-->
+      <div class="carousel-item">
+        <div class="view" style="background-image: url('model-images/index3.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Thai Food Delivery</strong>
+              </h1>
+
+              <p>
+                <strong>" I'm on a seafood diet. I see food and I eat it. "</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>Test3 Slide</strong>
+              </p>
+
+              
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/Third slide-->
+
+    </div>
+    <!--/.Slides-->
+
+    <!--Controls-->
     <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
@@ -61,50 +176,34 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
+    <!--/.Controls-->
 
-
- 
+  </div>
   <!--/.Carousel Wrapper-->
 
   <!--Main layout-->
   <main>
-      <div class="container" style="margin-top: 80px;">
+      <div class="container" style="width: 70%;margin: auto;padding-top: 100px">
 
-      <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
-
-        <!-- Navbar brand -->
-        <span class="navbar-brand">Categories:</span>
-
-        <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-       
-
-      </nav>
-      <!--/.Navbar-->
+   
 
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
 
-        <!--Grid row-->
-        <div class="row wow fadeIn">
+      
 
           <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
+          <div class="col-lg-5 col-md-auto mb-4">
 
-              
-              
+              <c:forEach items="${product}" var="p" varStatus="vs">
+              <div class="card-deck">
               
             <!--Card-->
-            <div class="card">
+            <div class="card mb-4">
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="model-images/R01.jpg" class="card-img-top" alt="">
+                <img src="model-images/${p.image}" class="card-img-top" alt="Card img cap">
                 <a>
                   <div class="mask rgba-white-slight"></div>
                 </a>
@@ -115,146 +214,32 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">ข้าวผัด</a>
-                  </strong>
-                </h5>
-
+                <!--Title-->
+                <h4 class="card-title">${p.productName}</h4>
+                <!--Text-->
+                <p class="card-text">${p.detail}</p>
                 <h4 class="font-weight-bold blue-text">
-                  <strong>40 B.</strong>
+                  <strong>${p.price} BTH.</strong>
                 </h4>
+                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                <button type="button" class="btn btn-light-blue btn-md">Add to Cart</button>
+
+                
 
               </div>
               <!--Card content-->
 
             </div>
             <!--Card-->
-
-            
+</div>
+            </c:forEach>
             
            
           </div>
           <!--Grid column-->
 
           <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="model-images/R02.jpg" class="card-img-top" alt="">
-                <a>
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-             
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">ข้าวกระเพราะไก่</a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>30 B.</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="model-images/01.jpg" class="card-img-top" alt="">
-                <a>
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-           
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">ไข่ข้นซอสต้มยำ
-                     
-                    </a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>50 B.</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Fourth column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="model-images/03.jpg" class="card-img-top" alt="">
-                <a>
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">ข้าวคลุกกะปิ</a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>50 B.</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Fourth column-->
-
-        </div>
-        <!--Grid row-->
+        
 
        
 

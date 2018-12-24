@@ -10,7 +10,7 @@
     <div class="container">
 
         <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="index.jsp" >
+        <a class="navbar-brand waves-effect" href="Index" >
             <strong class="blue-text">ThaiFoodDelivery</strong>
         </a>
 

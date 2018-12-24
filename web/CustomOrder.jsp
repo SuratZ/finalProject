@@ -36,23 +36,22 @@
 <!-- Default form register -->
 <form class="text-center border border-light p-5" action="CustomOrder" method="post">
 
-    <p class="h4 mb-4">Optional</p>
+    <h4 class="mb-4">Custom Menu</h4>
+    <h5 class="mb-4 font-weight-bold blue-text">50 BTH</h5>
    
 <div class=" col md-form">
-    <input type="hidden" name="customID" value="custom${id}">
+    <input type="hidden" name="customID" value="1">
     <textarea name="optionOrder" id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" required></textarea>
-  <label for="textarea-char-counter">โปรดใส่วัตถุดิบที่ต้องการ</label>
+  <label for="textarea-char-counter">Please Specify your Order</label>
 </div>
     
-
-
     <!-- order button -->
     <button class="btn btn-info my-4 btn-block" type="submit">Order</button>
 
     <hr>
     ${message}
 <p>
-    <a href="GoToJSP">Back</a>
+    <a href="Index">Back</a>
   </p>
    
 </form>

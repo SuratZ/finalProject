@@ -66,14 +66,14 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("account", a);
                         session.setAttribute("customer", customer);
 //                        request.getSession().setAttribute("message", "Login now");
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("/Index");
                         return;
                     }
                 }
             }
             request.setAttribute("message", "Invalid email or password!!");
         }
-        getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/Index").forward(request, response);
         
     }
 

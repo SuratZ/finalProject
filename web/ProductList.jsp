@@ -115,7 +115,7 @@
                 </tfoot> 
 
             </table>
-            <a href="index.jsp"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
+            <a href="Index"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
         </div>
 
 

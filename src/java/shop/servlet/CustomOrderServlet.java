@@ -6,6 +6,9 @@
 package shop.servlet;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -15,8 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import shop.model.Category;
+import shop.model.Customer;
+import shop.model.History;
 import shop.model.Product;
 import shop.model.ShoppingCart;
+import shop.model.jpa.controller.CategoryJpaController;
 import shop.model.jpa.controller.ProductJpaController;
 
 /**
@@ -28,6 +35,7 @@ public class CustomOrderServlet extends HttpServlet {
     EntityManagerFactory emf;
     @Resource
     UserTransaction utx;
+    Category categoryId;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,34 +50,37 @@ public class CustomOrderServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        
-            
-            
-        
-        
-        
+
         ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
         if(cart == null){
             cart = new ShoppingCart();
             session.setAttribute("cart", cart);
         }
         String customId = request.getParameter("customID");
+        String optionOrder = request.getParameter("optionOrder");
         int customIdInt = Integer.parseInt(customId);
         if(customIdInt>=0){
             customIdInt++;
-            session.setAttribute("Id", customIdInt);
-            session.setAttribute("customId", customId);
+            session.setAttribute("customId", customIdInt);
         }
         String productDetail = request.getParameter("optionOrder");
-        String productId = request.getParameter("productCode");
+        int productId = 0;
         session.setAttribute("productCode", customId);
         session.setAttribute("productName", "custom-Order");
-
+        session.setAttribute("productDetail", optionOrder);
+        CategoryJpaController catCtrl = new CategoryJpaController(utx, emf);
+        Category cat = (Category) session.getAttribute("3");
+        Customer cust = (Customer) session.getAttribute("customer");
         ProductJpaController productCtrl = new ProductJpaController(utx, emf);
-        Product product = new Product("customOrder.jpg",productId,"CustomOrder",productDetail, 50.0);
-       
         
-        cart.add(product);
+        
+        try {
+                Product pro = new Product("customOrder.jpg","C"+(productId++),"CustomOrder",cat,productDetail, 50.0);      
+                cart.add(pro);
+            } catch (Exception ex) {
+                Logger.getLogger(CheckOutTestServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         
 //        session.setAttribute("message", "");
 //        String customOrder = request.getParameter("orderName");
@@ -91,7 +102,7 @@ public class CustomOrderServlet extends HttpServlet {
 //            } catch (Exception ex) {
 //                Logger.getLogger(AddItemToCartServlet.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-            response.sendRedirect("Optional.jsp");
+            response.sendRedirect("CustomOrder.jsp");
         
     }
 

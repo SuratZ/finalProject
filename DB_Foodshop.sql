@@ -42,12 +42,14 @@ PRIMARY KEY (CUST_ID),
 FOREIGN KEY (EMAIL) REFERENCES ACCOUNT(email));
 
 create TABLE CUSTOM_ORDER (
-customOrderNo int,
-orderName varchar(50),
-orderDetail clob
+customOrderID int GENERATED ALWAYS AS IDENTITY(START WITH 1 , INCREMENT BY 1),
+CATEGORY_ID INT,
+DETAIL clob,
 CUST_ID INT
-PRIMARY KEY (customOrderNo),
-FOREIGN KEY (CUST_ID) REFERENCES customer(CUST_ID)
+PRIMARY KEY (customOrderID),
+FOREIGN KEY (CUST_ID) REFERENCES customer(CUST_ID),
+FOREIGN KEY (CATEGORY_ID) REFERENCES CATEGORY(CATEGORY_ID),
+FOREIGN KEY (CUST_ID) references Customer(cust_id)
 );
 
 
@@ -82,7 +84,7 @@ values ('R01','ข้าวผัด','ใส่ไข่ใส่หมู',1,4
 
 /*insert CATEGORY */
 insert into CATEGORY (CATEGORY_ID,CATEGORY_NAME) values
-(1,'Dish'),(2,'Desert');
+(1,'Dish'),(2,'Desert'),(3,'Custom');
 
 
 

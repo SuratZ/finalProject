@@ -50,7 +50,7 @@
                         </th>
                     </tr>
                 </thead>
-                <a href="GoToJSP"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
+                
                 <c:set var="items" value="${listHistory}"/>
                 <c:set var="bgColorX" value="lightgray" />
                 <c:set var="bgColorY" value="white" />
@@ -87,7 +87,7 @@
                 </tfoot> 
 
             </table>
-            <a href="GoToJSP"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
+            <a href="Index"><button mdbBtn color="info" block="true" class="btn btn-primary">Back</button></a>
         </div>
 
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

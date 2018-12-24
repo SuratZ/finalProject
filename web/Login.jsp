@@ -53,7 +53,7 @@
     <a href="Register.jsp">Register</a>
   </p>
  <p>
-    <a href="index.jsp">Back</a>
+    <a href="Index">Back</a>
   </p>
  
 </form>
