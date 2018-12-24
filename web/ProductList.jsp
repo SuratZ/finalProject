@@ -81,7 +81,8 @@
 
                         <td style="text-align: center;">${p.categoryId.categoryName}</td>
 
-                        <td style="text-align: center;">${p.productName}</td>  
+                        <td style="text-align: center;">${p.productName}<br><br>
+                                Detail: ${p.detail}</td>  
 
                         <td style="text-align: center;">${p.price} บาท</td>
                         <td style="text-align: center;">
