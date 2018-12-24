@@ -61,7 +61,8 @@
                         <td style="text-align: center;">${vs.count}</td>
                         <td style="text-align: center;">${h.getTimeStamp()}</td>
                         <td style="text-align: center;"><img width="120"src="model-images/${h.getProductId().getImage()}"></td>
-                        <td style="text-align: center;">${h.getProductId().getProductName()}</td>  
+                        <td style="text-align: center;">${h.getProductId().getProductName()}<br><br>
+                                Detail: ${h.getProductId().getDetail()}</td>  
                         <td style="text-align: center;">${h.getQuantity()}</td> 
                         <td style="text-align: center;">${h.getTotalPrice()} บาท</td>
 
