@@ -26,7 +26,7 @@
             <!-- Left -->
             <ul class="navbar-nav mr-auto">
                 
-                <li class="nav-item">
+                <li class="nav-item" hidden="">
                     <a class="nav-link waves-effect" href="CustomOrder.jsp" onclick="class: activate">Custom-Menu</a>
                 </li>
                 <li class="nav-item"hidden="">
