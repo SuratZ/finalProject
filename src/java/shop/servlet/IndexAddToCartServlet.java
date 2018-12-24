@@ -56,7 +56,7 @@ public class IndexAddToCartServlet extends HttpServlet {
         session.setAttribute("cart", cart);
         
 //        getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
-        getServletContext().getRequestDispatcher("/Index").forward(request, response);
+        response.sendRedirect("Index");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

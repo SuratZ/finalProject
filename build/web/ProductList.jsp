@@ -36,17 +36,17 @@
 
         <div style="width: 70%;margin: auto;padding-top: 100px">
             <h1>Menu</h1>
-            
-                <form action="SearchByPrice" method="get">
-                    <input type="number" name="min" placeholder="min price"  required="" value="${requestScope.min}">
-                    ~ 
-                    <input type="number" name="max" placeholder="max price" required="" value="${requestScope.max}"><br>
-                    <input class="btn btn-primary" type="submit" value="Search By Price">
-                    <a href="ProductList" type="button" class="btn btn-outline-info" >Reset</a>
-                </form>
-            
+
+            <form action="SearchByPrice" method="get">
+                <input type="number" name="min" placeholder="min price"  required="" value="${requestScope.min}">
+                ~ 
+                <input type="number" name="max" placeholder="max price" required="" value="${requestScope.max}"><br>
+                <input class="btn btn-primary" type="submit" value="Search By Price">
+                <a href="ProductList" type="button" class="btn btn-outline-info" >Reset</a>
+            </form>
+
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm table-responsive-md btn-table" a cellspacing="0" width="100%" >
-                
+
 
                 <thead>
                     <tr>
@@ -73,26 +73,28 @@
 
 
                 <c:forEach items="${product}" var="p" varStatus="vs">
+                    <c:if test="${p.categoryId.categoryId != 3}">
 
-                    <tr>
-                        <td style="text-align: center;">${vs.count}</td>
-                        <td style="text-align: center;"><img src="model-images/${p.productId}.jpg" width="120"></td>
-                        <td hidden="">${p.productId}</td>
 
-                        <td style="text-align: center;">${p.categoryId.categoryName}</td>
+                        <tr>
+                            <td style="text-align: center;">${vs.count}</td>
+                            <td style="text-align: center;"><img src="model-images/${p.productId}.jpg" width="120"></td>
+                            <td hidden="">${p.productId}</td>
 
-                        <td style="text-align: center;">${p.productName}<br><br>
+                            <td style="text-align: center;">${p.categoryId.categoryName}</td>
+
+                            <td style="text-align: center;">${p.productName}<br><br>
                                 Detail: ${p.detail}</td>  
 
-                        <td style="text-align: center;">${p.price} บาท</td>
-                        <td style="text-align: center;">
-                            <form action="AddItemToCart" method="post">
-                                <input type="hidden" value="${p.productId}" name="productCode"/>
-                                <button type="submit" class="btn btn-primary btn-sm m-0 waves-effect">Add to Cart</button>
-                            </form>
-                        </td>
-                    </tr>
-
+                            <td style="text-align: center;">${p.price} บาท</td>
+                            <td style="text-align: center;">
+                                <form action="AddItemToCart" method="post">
+                                    <input type="hidden" value="${p.productId}" name="productCode"/>
+                                    <button type="submit" class="btn btn-primary btn-sm m-0 waves-effect">Add to Cart</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:if>
                 </c:forEach>
 
                 <tfoot>

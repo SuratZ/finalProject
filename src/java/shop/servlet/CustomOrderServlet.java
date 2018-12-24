@@ -69,13 +69,14 @@ public class CustomOrderServlet extends HttpServlet {
         session.setAttribute("productName", "custom-Order");
         session.setAttribute("productDetail", optionOrder);
         CategoryJpaController catCtrl = new CategoryJpaController(utx, emf);
-        Category cat = (Category) session.getAttribute("3");
-        Customer cust = (Customer) session.getAttribute("customer");
+       
+   
         ProductJpaController productCtrl = new ProductJpaController(utx, emf);
         
         
         try {
-                Product pro = new Product("customOrder.jpg","C"+(productId++),"CustomOrder",cat,productDetail, 50.0);      
+                Product pro = new Product("customOrder.jpg","C"+(productId++),"CustomOrder",new Category(3),productDetail, 50.0);
+                productCtrl.create(pro);
                 cart.add(pro);
             } catch (Exception ex) {
                 Logger.getLogger(CheckOutTestServlet.class.getName()).log(Level.SEVERE, null, ex);

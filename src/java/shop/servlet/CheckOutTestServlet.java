@@ -82,7 +82,7 @@ public class CheckOutTestServlet extends HttpServlet {
 
         }
         session.removeAttribute("cart");
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("Index");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
