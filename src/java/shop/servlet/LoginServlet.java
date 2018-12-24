@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("account", a);
                         session.setAttribute("customer", customer);
 //                        request.getSession().setAttribute("message", "Login now");
-                        response.sendRedirect("/Index");
+                        response.sendRedirect("Index");
                         return;
                     }
                 }
