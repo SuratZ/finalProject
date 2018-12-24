@@ -73,7 +73,7 @@
 
     <hr>
 <p>
-    <a href="GoToJSP">Back</a>
+    <a href="Login.jsp">Back</a>
   </p>
 
 </form>
